@@ -56,7 +56,10 @@ namespace MIUI_Theme_Downloader
                     string themeurl = Regex.Match(ThemeUrlTextBox.Text, themeUrlPattern).Value;
                     ThemeDownloadUrlTextBox.Text = GenerateDirectDownloadUrl(themeurl);
                 }
-                
+                else
+                {
+                    ThemeDownloadUrlTextBox.Text = "看起来没有有效的主题链接";
+                }
             }
         }
 
@@ -192,6 +195,7 @@ namespace MIUI_Theme_Downloader
             if (downloads.Count > 0)
             {
                 DownloadThemeButton.IsEnabled = false;
+                FileInfoTextBlock.Visibility = Visibility.Visible;
                 List<Task> tasks = new List<Task>();
                 foreach (DownloadOperation download in downloads)
                 {
@@ -221,8 +225,6 @@ namespace MIUI_Theme_Downloader
                 string statusCode = response != null ? response.StatusCode.ToString() : String.Empty;
 
                 // "Completed: {0}, Status Code: {1}", download.Guid, statusCode
-                DownloadThemeButton.IsEnabled = true;
-
             }
             catch (TaskCanceledException)
             {
@@ -247,6 +249,10 @@ namespace MIUI_Theme_Downloader
             double percent = 100;
             if (currentProgress.TotalBytesToReceive > 0)
             {
+                if(currentProgress.BytesReceived == currentProgress.TotalBytesToReceive)
+                {
+                    DownloadThemeButton.IsEnabled = true;
+                }
                 percent = currentProgress.BytesReceived * 100 / currentProgress.TotalBytesToReceive;
             }
 
@@ -313,6 +319,10 @@ namespace MIUI_Theme_Downloader
                             await HandleDownloadAsync(download, true);
                         }
                     }
+                }
+                else
+                {
+                    ThemeDownloadUrlTextBox.Text = "看起来没有有效的主题链接";
                 }
 
             }
