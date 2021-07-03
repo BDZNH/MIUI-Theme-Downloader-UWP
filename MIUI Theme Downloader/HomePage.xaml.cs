@@ -311,6 +311,7 @@ namespace MIUI_Theme_Downloader
 
                         if(destinationFile != null)
                         {
+                            fileName = destinationFile.Name;
                             FileInfoTextBlock.Visibility = Visibility.Visible;
                             DownloadThemeButton.IsEnabled = false;
                             BackgroundDownloader downloader = new BackgroundDownloader();
