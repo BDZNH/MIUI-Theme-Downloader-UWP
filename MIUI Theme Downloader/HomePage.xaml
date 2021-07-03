@@ -8,37 +8,26 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <TextBox x:Name="ThemeUrlTextBox" PlaceholderText="粘贴主题的商店链接在这个框里" Margin="0,10,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" />
-        <TextBox x:Name="ThemeDownloadUrlTextBox" PlaceholderText="选择版本点击下方的按钮以获取链接" Margin="0,10,0,0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" IsReadOnly="True" />
-        <RadioButton Content="V4" Tag="4" GroupName="ThemeVersion" Grid.Row="2" Grid.Column="0" Margin="0,10,0,0" Checked="HandleCheck"/>
-        <RadioButton Content="V5" Tag="5" GroupName="ThemeVersion" Grid.Row="2" Grid.Column="1" Margin="0,10,0,0"  Checked="HandleCheck"/>
-        <RadioButton Content="V6/V7" Tag="6" GroupName="ThemeVersion" Grid.Row="2" Grid.Column="2" Margin="0,10,0,0"  Checked="HandleCheck"/>
-        <RadioButton Content="V8/V9" Tag="8" GroupName="ThemeVersion" Grid.Row="2" Grid.Column="3" Margin="0,10,0,0"  Checked="HandleCheck"/>
-        <RadioButton Content="V10" Tag="10" GroupName="ThemeVersion" Grid.Row="2" Grid.Column="4" Margin="0,10,0,0"  Checked="HandleCheck"/>
-        <RadioButton Content="V11" Tag="11" GroupName="ThemeVersion" Grid.Row="2" Grid.Column="5" Margin="0,10,0,0"  Checked="HandleCheck"/>
-        <RadioButton Content="V12" Tag="12" GroupName="ThemeVersion" Grid.Row="2" Grid.Column="6"  Margin="0,10,0,0"  Checked="HandleCheck" IsChecked="True"/>
-        <Button x:Name="GenerateDirectDownloadUrlButton" Content="获取链接" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0" Click="GenerateDirectDownloadUrlButton_Click" />
-        <Button x:Name="CopyDownloadUrlToButton" Content="复制链接" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,10,0,0" Click="CopyDownloadUrlToButton_Click" />
-        <Button x:Name="DownloadThemeButton" Content="下载" Grid.Row="3" Grid.Column="4" VerticalAlignment="Bottom" Click="DownloadThemeButton_Click" />
-        <Button x:Name="CancelDownload" Content="取消下载" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" Margin="0,10,0,0" Click="CancelDownload_Click"/>
-        <muxc:ProgressBar x:Name="DownloadProgressBar" Value="0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Stretch" Margin="0,10,0,0" Visibility="Visible" />
-    </Grid>
+    <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <TextBox x:Name="ThemeUrlTextBox" PlaceholderText="粘贴主题的商店链接在这个框里" Width="523" Height="auto" Margin="2,2,2,5"  />
+        <TextBox x:Name="ThemeDownloadUrlTextBox" PlaceholderText="选择版本并点击下方的按钮以获取链接" RelativePanel.Below="ThemeUrlTextBox" Margin="2" IsReadOnly="True" Width="523"/>
+        <RelativePanel x:Name="version" RelativePanel.Below="ThemeDownloadUrlTextBox" Margin="2,0,2,0">
+            <RadioButton x:Name="checkV4" Content="V4" Tag="4" GroupName="ThemeVersion" MinWidth="72" Checked="HandleCheck"/>
+            <RadioButton x:Name="checkV5" Content="V5" Tag="5" GroupName="ThemeVersion"  RelativePanel.RightOf="checkV4" MinWidth="73" Checked="HandleCheck"/>
+            <RadioButton x:Name="checkV67" Content="V6/V7" Tag="6" GroupName="ThemeVersion" RelativePanel.RightOf="checkV5" MinWidth="90" Checked="HandleCheck"/>
+            <RadioButton x:Name="checkV89" Content="V8/V9" Tag="8" GroupName="ThemeVersion" RelativePanel.RightOf="checkV67"  MinWidth="90" Checked="HandleCheck"/>
+            <RadioButton x:Name="checkV10" Content="V10" Tag="10" GroupName="ThemeVersion"  RelativePanel.RightOf="checkV89" MinWidth="73" Checked="HandleCheck"/>
+            <RadioButton x:Name="checkV11" Content="V11" Tag="11" GroupName="ThemeVersion"  RelativePanel.RightOf="checkV10" MinWidth="72" Checked="HandleCheck"/>
+            <RadioButton x:Name="checkV12" Content="V12" Tag="12" GroupName="ThemeVersion"  RelativePanel.RightOf="checkV11" MinWidth="50" Checked="HandleCheck" IsChecked="True"/>
+        </RelativePanel>
+        <RelativePanel RelativePanel.Below="version" x:Name="buttons" Margin="2,2,2,0">
+            <Button x:Name="GenerateDirectDownloadUrlButton" Content="生成链接" MinWidth="100" Margin="0,0,5,0" Click="GenerateDirectDownloadUrlButton_Click" />
+            <Button x:Name="CopyDownloadUrlToButton" Content="复制链接" MinWidth="100" Margin="0,0,5,0" RelativePanel.RightOf="GenerateDirectDownloadUrlButton" Click="CopyDownloadUrlToButton_Click" />
+            <Button x:Name="DownloadThemeButton" Content="下载" MinWidth="70" Margin="0,0,5,0" RelativePanel.RightOf="CopyDownloadUrlToButton" VerticalAlignment="Bottom" Click="DownloadThemeButton_Click" />
+            <Button x:Name="CancelDownloadButton" Content="取消下载" MinWidth="100" Margin="0,0,5,0"  RelativePanel.RightOf="DownloadThemeButton" Click="CancelDownload_Click"/>
+            <Button x:Name="OpenMIUIThemeStoreButton" Content="打开主题商店" MinWidth="132" Margin="0,0,0,0" RelativePanel.RightOf="CancelDownloadButton" Click="OpenMIUIThemeStoreButton_Click"/>
+        </RelativePanel>
+        <TextBox Background="Transparent" BorderThickness="0" x:Name="FileInfoTextBlock" RelativePanel.Below="buttons" Margin="2,5,0,0" Width="522" Height="Auto" Visibility="Collapsed"/>
+        <muxc:ProgressBar x:Name="DownloadProgressBar" Value="0" RelativePanel.Below="FileInfoTextBlock" Margin="2,5,0,0" Visibility="Visible" HorizontalAlignment="Center" Width="522" />
+    </RelativePanel>
 </Page>

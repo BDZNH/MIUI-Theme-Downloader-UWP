@@ -29,7 +29,18 @@ namespace MIUI_Theme_Downloader
 
         private void NaviView_ItemInvoked(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
         {
-
+            if (args.IsSettingsInvoked)
+            {
+                this.ContentFrame.Navigate(typeof(SettingsPage));
+            }
+            var tag = args.InvokedItemContainer.Tag.ToString();
+            var page =
+                tag == "HomePage" ? typeof(HomePage) :
+                tag == "AboutPage" ? typeof(AboutPage) : null;
+            if (page != null && !Type.Equals(page, ContentFrame.CurrentSourcePageType))
+            {
+                this.ContentFrame.Navigate(page);
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

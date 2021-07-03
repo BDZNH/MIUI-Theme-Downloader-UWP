@@ -37,6 +37,7 @@ namespace MIUI_Theme_Downloader
 
         private string checkVersion = "V12";
         private string downloadUrl = null;
+        private static string fileName = null;
 
         private CancellationTokenSource cts;
         private List<DownloadOperation> activeDownloads;
@@ -190,6 +191,7 @@ namespace MIUI_Theme_Downloader
 
             if (downloads.Count > 0)
             {
+                DownloadThemeButton.IsEnabled = false;
                 List<Task> tasks = new List<Task>();
                 foreach (DownloadOperation download in downloads)
                 {
@@ -219,6 +221,8 @@ namespace MIUI_Theme_Downloader
                 string statusCode = response != null ? response.StatusCode.ToString() : String.Empty;
 
                 // "Completed: {0}, Status Code: {1}", download.Guid, statusCode
+                DownloadThemeButton.IsEnabled = true;
+
             }
             catch (TaskCanceledException)
             {
@@ -247,6 +251,7 @@ namespace MIUI_Theme_Downloader
             }
 
             DownloadProgressBar.Value = percent;
+            FileInfoTextBlock.Text = fileName + " " + percent + "%";
         }
 
         private bool IsExceptionHandled(string title, Exception ex, DownloadOperation download = null)
@@ -282,26 +287,26 @@ namespace MIUI_Theme_Downloader
                     if (downloadUrl != null)
                     {
                         Uri source;
-                        string debugurl = @"http://192.168.1.104/files/B.Duck%E7%8E%A9%E8%B6%A3%E7%BB%8F%E5%85%B8.mtz";
-                        if (!Uri.TryCreate(debugurl, UriKind.Absolute, out source))
+                        if (!Uri.TryCreate(downloadUrl, UriKind.Absolute, out source))
                         {
                             return;
                         }
 
                         string tmpdownloadurl = System.Web.HttpUtility.UrlDecode(downloadUrl);
                         int lastbackslash = tmpdownloadurl.LastIndexOf("/");
-                        string filename = tmpdownloadurl.Substring(lastbackslash + 1);
+                        fileName = tmpdownloadurl.Substring(lastbackslash + 1);
 
                         var savePicker = new Windows.Storage.Pickers.FileSavePicker();
                         savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Downloads;
                         savePicker.FileTypeChoices.Add("All", new List<string>() { ".mtz" });
-                        savePicker.SuggestedFileName = filename;
+                        savePicker.SuggestedFileName = fileName;
 
                         StorageFile destinationFile = await savePicker.PickSaveFileAsync();
 
                         if(destinationFile != null)
                         {
-                            
+                            FileInfoTextBlock.Visibility = Visibility.Visible;
+                            DownloadThemeButton.IsEnabled = false;
                             BackgroundDownloader downloader = new BackgroundDownloader();
                             DownloadOperation download = downloader.CreateDownload(source, destinationFile);
                             download.Priority = BackgroundTransferPriority.High;
@@ -335,6 +340,17 @@ namespace MIUI_Theme_Downloader
             GC.SuppressFinalize(this);
 
             DownloadProgressBar.Value = 0;
+        }
+
+        private void OpenMIUIThemeStoreButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenLinkOverDeafultWebBroweser(@"https://zhuti.xiaomi.com/");
+        }
+
+        private async void OpenLinkOverDeafultWebBroweser(string str)
+        {
+            var uri = new Uri(str);
+            await Windows.System.Launcher.LaunchUriAsync(uri);
         }
     }
 }

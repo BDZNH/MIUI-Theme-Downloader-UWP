@@ -15,7 +15,7 @@
                 <muxc:NavigationViewItem Icon="Home" Content="操作" Tag="HomePage" />
                 <muxc:NavigationViewItem Icon="Help" Content="关于" Tag="AboutPage" />
             </muxc:NavigationView.MenuItems>
-            <ScrollViewer>
+            <ScrollViewer >
                 <Frame x:Name="ContentFrame" Padding="12,50,12,24" IsTabStop="True" />
             </ScrollViewer>
         </muxc:NavigationView>

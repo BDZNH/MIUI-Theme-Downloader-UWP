@@ -1,0 +1,19 @@
+﻿<Page
+    x:Class="MIUI_Theme_Downloader.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MIUI_Theme_Downloader"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="版本指的是什么？"/>
+            <TextBlock TextWrapping="Wrap" Text="这里指的是MIUI版本，但是实际上有些主题在指定版本上并不存在，这种情况，服务器返回什么，就显示什么。"/>
+            <TextBlock Text="有预料之外的事情发生？" Margin="0,10,0,0" />
+            <HyperlinkButton Content="你可以尝试在这里反馈一些信息" NavigateUri="https://github.com/BDZNH/MIUI-Theme-Download-Link-Generator/issues/new" />
+        </StackPanel>
+    </Grid>
+</Page>
