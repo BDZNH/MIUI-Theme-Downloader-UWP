@@ -24,6 +24,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBox x:Name="ThemeUrlTextBox" PlaceholderText="粘贴主题的商店链接在这个框里" Margin="0,10,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" />
         <TextBox x:Name="ThemeDownloadUrlTextBox" PlaceholderText="选择版本点击下方的按钮以获取链接" Margin="0,10,0,0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" IsReadOnly="True" />
@@ -34,8 +35,10 @@
         <RadioButton Content="V10" Tag="10" GroupName="ThemeVersion" Grid.Row="2" Grid.Column="4" Margin="0,10,0,0"  Checked="HandleCheck"/>
         <RadioButton Content="V11" Tag="11" GroupName="ThemeVersion" Grid.Row="2" Grid.Column="5" Margin="0,10,0,0"  Checked="HandleCheck"/>
         <RadioButton Content="V12" Tag="12" GroupName="ThemeVersion" Grid.Row="2" Grid.Column="6"  Margin="0,10,0,0"  Checked="HandleCheck" IsChecked="True"/>
-        <Button x:Name="GenerateDirectDownloadUrlButton" Content="获取下载链接" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0" Click="GenerateDirectDownloadUrlButton_Click" />
-        <Button x:Name="CopyDownloadUrlToButton" Content="复制下载链接" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,10,0,0" Click="CopyDownloadUrlToButton_Click" />
-        <Button x:Name="DownloadThemeButton" Content="下载到本地" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" Margin="0,10,0,0" />
+        <Button x:Name="GenerateDirectDownloadUrlButton" Content="获取链接" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0" Click="GenerateDirectDownloadUrlButton_Click" />
+        <Button x:Name="CopyDownloadUrlToButton" Content="复制链接" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,10,0,0" Click="CopyDownloadUrlToButton_Click" />
+        <Button x:Name="DownloadThemeButton" Content="下载" Grid.Row="3" Grid.Column="4" VerticalAlignment="Bottom" Click="DownloadThemeButton_Click" />
+        <Button x:Name="CancelDownload" Content="取消下载" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" Margin="0,10,0,0" Click="CancelDownload_Click"/>
+        <muxc:ProgressBar x:Name="DownloadProgressBar" Value="0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Stretch" Margin="0,10,0,0" Visibility="Visible" />
     </Grid>
 </Page>
