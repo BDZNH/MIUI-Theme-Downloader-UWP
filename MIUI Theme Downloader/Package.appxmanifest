@@ -9,7 +9,7 @@
   <Identity
     Name="35230BDZNH.MIUI"
     Publisher="CN=16C28CEF-6E96-4E95-B0E5-BA77A7D56B37"
-    Version="0.0.1.0" />
+    Version="2.0.3.0" />
 
   <mp:PhoneIdentity PhoneProductId="a9bc4680-7c7a-4035-9249-b604db420a2b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
